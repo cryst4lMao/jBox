@@ -14,7 +14,7 @@ module.exports = function(grunt) {
         cssmin: {
             cm: {
                 files: {
-                    'dist/jquery.jbox-min.css': ['css/reset.css','css/jbox.css','css/buttons-fx.css'],
+                    'dist/jquery.jbox-min.css': ['css/reset.css','css/jbox.css'],
                     'dist/jbox-min.css': ['css/jbox.css']
                 }
             }
