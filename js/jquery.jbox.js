@@ -1,5 +1,5 @@
 // jQuery Alert Dialogs Plugin
-// Version 1.0
+// Version 1.1
 // Author iancj 2014-04-09
 // Visit http://github.com/iancj/jbox for more information
 
@@ -14,7 +14,19 @@
 		minHeight:200,//最小高度
 		content:"",//自定义内容
 		onOpen:false,//打开弹窗时的回调
-		onClosed:false//关闭窗口后的回调
+		onClosed:false,//关闭窗口后的回调
+		btnOK:{//确定按钮参数
+			text:"确定",//按钮显示文字
+			show:true,//是否显示按钮
+			extclass:"btn btn-blue",//按钮追加的样式
+			onBtnClick:false//点击按钮的事件
+		},
+		btnCancle:{
+			text:"取消",//按钮显示文字
+			show:true,//是否显示按钮
+			extclass:"btn",//按钮追加的样式
+			onBtnClick:false//点击按钮的事件
+		}
 	};
 
 	var isIE=$.browser.msie,
@@ -30,6 +42,7 @@
 
 	//创建窗体
 	JBox.prototype.create=function(opts,callback){
+		// log(opts);
 		var	title=this.title,//弹窗显示的标题
 			selector=this.selector,//弹窗的目标选择器
 			$content=null,//弹出的内容
@@ -43,24 +56,60 @@
 			}
 			catch(e){}
 
-
 		//append  html
 		var $jbox=$('<div class="jbox"></div>'),
 			$jbox_title=$('<div class="jbox-title"></div>'),
-			$jbox_container=$('<div class="jbox-container"></div>');
-
+			$jbox_container=$('<div class="jbox-container"></div>'),
+			$jbox_buttons=$('<div class="jbox-buttons"></div>');
+			
 			$jbox_title.append(
 				'<div class="jbox-title-txt">'+title+'</div>',
 				'<a href="javascript:;" class="jbox-close"></a>'
-				)
+			);
 
+			//是否显示确定按钮
+			if(opts.btnOK.show){
+				var $btn_ok=$('<a href="javascript:;" class="jbox-buttons-ok '+opts.btnOK.extclass+'">'+opts.btnOK.text+'</a>');
+
+				//绑定点击按钮事件
+				if(opts.btnOK.onBtnClick){
+					$btn_ok.click(function(){
+						opts.btnOK.onBtnClick($jbox);
+					});
+				}
+
+				$jbox_buttons.append($btn_ok);
+			}
+
+			//是否显示取消按钮
+			if(opts.btnCancle.show){
+				var $btn_cancle=$('<a href="javascript:;" class="jbox-buttons-ok '+opts.btnCancle.extclass+'">'+opts.btnCancle.text+'</a>');
+
+				//绑定点击按钮事件
+				if(opts.btnCancle.onBtnClick){
+					$btn_cancle.click(function(){
+						opts.btnCancle.onBtnClick($jbox);
+					});
+				}
+
+				$jbox_buttons.append($btn_cancle);
+			}
+
+			//更新内容
 			$jbox_container.append($content);
 
-			$jbox.append($jbox_title,$jbox_container);
+			//若按钮之一为显示状态则将按钮组插入窗体
+			if(opts.btnOK.show || opts.btnCancle.show){
+				$jbox.append($jbox_title,$jbox_container,$jbox_buttons);
+			}
+			else{
+				$jbox.append($jbox_title,$jbox_container);
+			}
 
+			//将窗体插入body中
 			$("body").append($jbox);
 
-			//重置窗体
+			//重置窗体位置
 			_reposition($jbox,opts);
 			//显示遮罩层
 			_showOverlay();
@@ -94,7 +143,10 @@
 	// *****************
 	// 私有方法
 	// *****************
+
 	//重置位置
+	//@param $ele 要关闭的jBox jQuery对象
+	//@param options 传入的新参数
 	function _reposition($ele,options){
 		var width=$ele.outerWidth(),//宽度
 			height=$ele.outerHeight(),//高度
@@ -102,8 +154,10 @@
 			winHeight=$win.height(),//窗口高度
 			winWidth=$win.width(),//窗口高度
 			titleHeight=$ele.find(".jbox-title").outerHeight(),//标题高度
+			buttonsHeight=$ele.find(".jbox-buttons").outerHeight(),//按钮组
 			$container=$ele.find(".jbox-container"),//内容容器
-			opts=$.extend({},defaults,options);//合并配置项
+			opts=_extendOpts(options);//合并参数
+
 
 		if(opts.width=="auto"){
 			if(width<opts.minWidth){
@@ -137,7 +191,7 @@
 			height=winHeight-50
 		}
 		
-		$container.css("height",height-titleHeight-parseInt($container.css("paddingTop"))-parseInt($container.css("paddingBottom")));
+		$container.css("height",height-titleHeight-buttonsHeight-parseInt($container.css("paddingTop"))-parseInt($container.css("paddingBottom")));
 
 		$ele.css({
 			"position":"fixed",
@@ -200,6 +254,23 @@
 		$("#jbox-overlay").fadeOut(200);
 	}
 
+	//合并参数
+	//@param newOpts 传入的新参数
+	function _extendOpts(newOpts){
+		var opts=null
+			opts_btnok=null,
+			opts_btncancel=null;
+
+		opts=$.extend({},defaults,newOpts);//合并所有参数
+		opts_btnok=$.extend({},defaults.btnOK,newOpts.btnOK);//合并确定按钮参数
+		opts_btncancel=$.extend({},defaults.btnCancle,newOpts.btnCancle);//合并取消按钮参数
+
+		opts.btnOK=opts_btnok;
+		opts.btnCancle=opts_btncancel;
+
+		return opts;
+	}
+
 	// *****************
 	// 公共方法
 	// 使用格式: $("#box3").jBox();
@@ -208,7 +279,7 @@
 		return this.each(function(){
 			var $self=$(this),
 				rule=$self.data("rule") || "normal",
-				opts=$.extend({},defaults,options);
+				opts=_extendOpts(options?options:{});
 
 			if(rule=="box"){
 				$self.click(function(){

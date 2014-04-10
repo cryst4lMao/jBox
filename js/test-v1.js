@@ -7,6 +7,18 @@ $(function() {
             $("#testhide").one("click", function() {
                 $.jBox.close(element);
             });
+        },
+        btnOK:{
+            onBtnClick:function(ele){
+                log("yes")
+                $.jBox.close(ele);
+            }
+        },
+        btnCancle:{
+            onBtnClick:function(ele){
+                log("cancle")
+                $.jBox.close(ele);
+            }
         }
     });
 

@@ -51,6 +51,11 @@ $.jBox.reposition();
 **参数说明**
 <table>
    <tr>
+      <td>参数</td>
+      <td>值的类型</td>
+      <td>描述</td>
+   </tr>
+   <tr>
       <td>title</td>
       <td>String</td>
       <td>标题</td>
@@ -89,5 +94,51 @@ $.jBox.reposition();
       <td>onClosed</td>
       <td>Function</td>
       <td>窗体关闭后执行的回调函数</td>
+   </tr>
+   <tr>
+      <td>
+         btnOK <br>
+          ·text <br>
+          ·show <br>
+          ·extclass <br>
+          ·onBtnClick
+      </td>
+      <td>
+         Object <br>
+          ·String <br>
+          ·Boolean <br>
+          ·String <br>
+          ·Boolean <br>
+      </td>
+      <td>
+         确定按钮参数 <br>
+          ·按钮的显示文字 <br>
+          ·是否显示按钮 <br>
+          ·按钮追加的样式 <br>
+          ·点击按钮的事件 <br>
+      </td>
+   </tr>
+   <tr>
+      <td>
+         btnCancle <br>
+          ·text <br>
+          ·show <br>
+          ·extclass <br>
+          ·onBtnClick
+      </td>
+      <td>
+         Object <br>
+          ·String <br>
+          ·Boolean <br>
+          ·String <br>
+          ·Boolean <br>
+      </td>
+      <td>
+         取消按钮参数 <br>
+          ·按钮的显示文字 <br>
+          ·是否显示按钮 <br>
+          ·按钮追加的样式 <br>
+          ·点击按钮的事件 <br>
+      </td>
    </tr>
 </table>
