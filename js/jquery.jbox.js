@@ -86,11 +86,15 @@
 				var $btn_cancle=$('<a href="javascript:;" class="jbox-buttons-ok '+opts.btnCancle.extclass+'">'+opts.btnCancle.text+'</a>');
 
 				//绑定点击按钮事件
-				if(opts.btnCancle.onBtnClick){
-					$btn_cancle.click(function(){
+				$btn_cancle.click(function(){
+					//有自定义回调函数则执行自定义回调函数,否则默认执行触摸关闭事件
+					if(opts.btnCancle.onBtnClick){
 						opts.btnCancle.onBtnClick($jbox);
-					});
-				}
+					}
+					else{
+						$jbox.find(".jbox-close").triggerHandler("click");
+					}
+				});
 
 				$jbox_buttons.append($btn_cancle);
 			}
