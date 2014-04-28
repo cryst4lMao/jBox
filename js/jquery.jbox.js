@@ -74,7 +74,8 @@
 				//绑定点击按钮事件
 				if(opts.btnOK.onBtnClick){
 					$btn_ok.click(function(){
-						opts.btnOK.onBtnClick($jbox);
+						opts.btnOK.onBtnClick.call(opts.selfDom,$jbox);
+						// opts.btnOK.onBtnClick();
 					});
 				}
 
@@ -89,7 +90,8 @@
 				$btn_cancle.click(function(){
 					//有自定义回调函数则执行自定义回调函数,否则默认执行触摸关闭事件
 					if(opts.btnCancle.onBtnClick){
-						opts.btnCancle.onBtnClick($jbox);
+						opts.btnCancle.onBtnClick.call(opts.selfDom,$jbox);
+						// opts.btnCancle.onBtnClick($jbox);
 					}
 					else{
 						$jbox.find(".jbox-close").triggerHandler("click");
@@ -126,7 +128,8 @@
 				catch(e){}
 				//如果有关闭回调事件则执行
 				if(opts.onClosed){
-					opts.onClosed();
+					opts.onClosed.call(opts.selfDom);
+					// opts.onClosed();
 				}
 				//移除窗体
 				$jbox.remove();
@@ -139,7 +142,8 @@
 			//如果有onOpen回调，则执行
 			if($jbox){
 				if(callback){
-					callback($jbox);
+					callback.call(opts.selfDom,$jbox);
+					// callback($jbox);
 				}
 			}
 	}
@@ -238,7 +242,7 @@
 			"width": '100%',
 			"height": height,
 			"background": "#000",
-			"opacity": 0.5
+			"opacity": 0.15
 		});
 
 		//hack for ie6
@@ -284,6 +288,7 @@
 			var $self=$(this),
 				rule=$self.data("rule") || "normal",
 				opts=_extendOpts(options?options:{});
+				opts.selfDom=this;
 
 			if(rule=="box"){
 				$self.click(function(){
@@ -329,6 +334,21 @@
 			_reposition($(this));
 		});
 	};
+
+	//使用格式: $.jBox.showloading();
+	publicmethod.showloading=function(){
+		var $loading=$("#jbox-loading");
+		if(!$loading.length>0){
+			var $loading=$('<div id="jbox-loading" style="display:none;"><div id="jbox-loading-bg"><em><i></i></em></div></div>');
+			$("body").append($loading);
+		}
+		$loading.fadeIn(200);
+	}
+
+	//使用格式: $.jBox.hideloading();
+	publicmethod.hideloading=function(){
+		$("#jbox-loading").fadeOut(200);
+	}
 
 	//使用格式: $.jBox.Close(element);
 	publicmethod.close=function(element){

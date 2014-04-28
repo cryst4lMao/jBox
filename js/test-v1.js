@@ -10,13 +10,13 @@ $(function() {
         },
         btnOK:{
             onBtnClick:function(ele){
-                log("yes")
+                log(this);
                 $.jBox.close(ele);
             }
         },
         btnCancle:{
             onBtnClick:function(ele){
-                log("cancle")
+                log("cancle");
                 $.jBox.close(ele);
             }
         }
@@ -32,6 +32,11 @@ $(function() {
             title:"asd",
             content:'<input type="text" />'
         });
+    });
+
+    $("#loading").click(function(){
+        $.jBox.showloading();
+        setTimeout($.jBox.hideloading,2000);
     });
 
 });
