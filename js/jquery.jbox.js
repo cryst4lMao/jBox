@@ -74,8 +74,7 @@
 				//绑定点击按钮事件
 				if(opts.btnOK.onBtnClick){
 					$btn_ok.click(function(){
-						opts.btnOK.onBtnClick.call(opts.selfDom,$jbox);
-						// opts.btnOK.onBtnClick();
+						opts.btnOK.onBtnClick.call(opts.trigger,$jbox);
 					});
 				}
 
@@ -90,8 +89,7 @@
 				$btn_cancle.click(function(){
 					//有自定义回调函数则执行自定义回调函数,否则默认执行触摸关闭事件
 					if(opts.btnCancle.onBtnClick){
-						opts.btnCancle.onBtnClick.call(opts.selfDom,$jbox);
-						// opts.btnCancle.onBtnClick($jbox);
+						opts.btnCancle.onBtnClick.call(opts.trigger,$jbox);
 					}
 					else{
 						$jbox.find(".jbox-close").triggerHandler("click");
@@ -128,8 +126,7 @@
 				catch(e){}
 				//如果有关闭回调事件则执行
 				if(opts.onClosed){
-					opts.onClosed.call(opts.selfDom);
-					// opts.onClosed();
+					opts.onClosed.call(opts.trigger);
 				}
 				//移除窗体
 				$jbox.remove();
@@ -140,11 +137,8 @@
 			});
 
 			//如果有onOpen回调，则执行
-			if($jbox){
-				if(callback){
-					callback.call(opts.selfDom,$jbox);
-					// callback($jbox);
-				}
+			if($jbox && callback){
+				callback.call(opts.trigger,$jbox);
 			}
 	}
 
@@ -265,7 +259,7 @@
 	//合并参数
 	//@param newOpts 传入的新参数
 	function _extendOpts(newOpts){
-		var opts=null
+		var opts=null,
 			opts_btnok=null,
 			opts_btncancel=null;
 
@@ -288,7 +282,7 @@
 			var $self=$(this),
 				rule=$self.data("rule") || "normal",
 				opts=_extendOpts(options?options:{});
-				opts.selfDom=this;
+				opts.trigger=this;
 
 			if(rule=="box"){
 				$self.click(function(){
@@ -315,7 +309,7 @@
 	// *****************
 	// 公共静态方法
 	// *****************
-	publicmethod=$["jBox"]={};
+	var publicmethod=$["jBox"]={};
 
 	//使用格式: $.jBox.show();
 	publicmethod.show=function(options){
