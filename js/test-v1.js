@@ -1,5 +1,6 @@
 $(function() {
 
+  var log = $.jBox.log;
     $(".j-obbox").jBox({
         minWidth:500,
         mingHeight:300,
@@ -21,7 +22,6 @@ $(function() {
             }
         }
     });
-
 
     $("#btn3").click(function(){
         $("#box3").jBox();
