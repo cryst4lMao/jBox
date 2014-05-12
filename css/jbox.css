@@ -12,7 +12,7 @@
 .jbox-title{
 	position:relative;
 	color:#fff;
-	height::;px;
+	height:30px;
 	background-color:#4A4A4A;
 }
 .jbox-title-txt{
@@ -59,64 +59,33 @@
 	top:0;
 	left:0;
 	background:rgba(0,0,0,0.15);
-}
-
-#jbox-loading-bg{
-	position: absolute;
-	top:50%;
-	left:50%;
-	display: block;
-	width:70px;
-	height: 70px;
-	border:5px solid #53b8c0;
-	border-radius:70px;
-	margin:-40px 0 0 -40px;
-	font-size:0;
-}
-#jbox-loading em{
-	position: absolute;
-	top:0;
-	left:25px;
-	display:block;
-	width:20px;
-	height:70px;
-	-webkit-animation:rotateLoading 2s infinite linear;
+	z-index:999999;
 }
 
 #jbox-loading i{
-	position: absolute;
-	content: " ";
-	display: block;
-	top:-13px;
-	left: 0;
-	height:30px;
-	width: 30px;
-	background-color: #d8d8d8;
+	display:block;
+	position: fixed;
+	height:80px;
+	width: 80px;
+	top:50%;
+	left:50%;
+	margin:-40px 0 0 -40px;
+	background:url(Images/loading.png) no-repeat;
+	-webkit-animation:rotateLoading 2s linear 0 infinite;
+	-moz-animation:rotateLoading 2s linear 0 infinite;
 }
 
-#jbox-loading i::before,
-#jbox-loading i::after{
-	display: block;
-	position: absolute;
-	content: " ";
-	width:7px;
-	height: 5px;
-	border-radius:0 5px 5px 0;
-	background-color:#53b8c0;
-}
-#jbox-loading i::before{
-	top:9px;
-	left: -1px;
-	-webkit-transform:rotate(-12deg);
-}
-#jbox-loading i::after{
-	top:14px;
-	left:27px;
-	border-radius:5px 0 0 5px;
-	-webkit-transform:rotate(36deg);
-}
 
 @-webkit-keyframes rotateLoading {
+    0% {
+        -webkit-transform:rotate(0deg)
+    }
+    100% {
+        -webkit-transform:rotate(360deg)
+    }
+}
+
+@-moz-keyframes rotateLoading {
     0% {
         -webkit-transform:rotate(0deg)
     }
