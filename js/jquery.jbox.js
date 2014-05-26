@@ -3,7 +3,7 @@
 // Author iancj 2014-04-09
 // Visit http://github.com/iancj/jbox for more information
 
-(function($,document,window){
+;(function($,document,window){
 
 	//默认配置项
 	var defaults={
@@ -352,11 +352,11 @@
 }(jQuery,document,window));
 
 //show log
-function log(msg){
-	if(typeof console != "undefined"){
-		console.log(msg);
-	}
-	else{
-		alert(msg);
-	}
-}
+// function log(msg){
+// 	if(typeof console != "undefined"){
+// 		console.log(msg);
+// 	}
+// 	else{
+// 		alert(msg);
+// 	}
+// }
