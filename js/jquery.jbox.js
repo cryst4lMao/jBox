@@ -3,7 +3,7 @@
 // Author iancj 2014-04-09
 // Visit http://github.com/iancj/jbox for more information
 
-(function($,document,window){
+;(function($,document,window){
 
 	//默认配置项
 	var defaults={
@@ -21,7 +21,7 @@
 			extclass:"btn btn-blue",//按钮追加的样式
 			onBtnClick:false//点击按钮的事件
 		},
-		btnCancle:{
+		btnCancel:{
 			text:"取消",//按钮显示文字
 			show:true,//是否显示按钮
 			extclass:"btn",//按钮追加的样式
@@ -82,14 +82,14 @@
 			}
 
 			//是否显示取消按钮
-			if(opts.btnCancle.show){
-				var $btn_cancle=$('<a href="javascript:;" class="jbox-buttons-ok '+opts.btnCancle.extclass+'">'+opts.btnCancle.text+'</a>');
+			if(opts.btnCancel.show){
+				var $btn_cancle=$('<a href="javascript:;" class="jbox-buttons-ok '+opts.btnCancel.extclass+'">'+opts.btnCancel.text+'</a>');
 
 				//绑定点击按钮事件
 				$btn_cancle.click(function(){
 					//有自定义回调函数则执行自定义回调函数,否则默认执行触摸关闭事件
-					if(opts.btnCancle.onBtnClick){
-						opts.btnCancle.onBtnClick.call(opts.trigger,$jbox);
+					if(opts.btnCancel.onBtnClick){
+						opts.btnCancel.onBtnClick.call(opts.trigger,$jbox);
 					}
 					else{
 						$jbox.find(".jbox-close").triggerHandler("click");
@@ -103,7 +103,7 @@
 			$jbox_container.append($content);
 
 			//若按钮之一为显示状态则将按钮组插入窗体
-			if(opts.btnOK.show || opts.btnCancle.show){
+			if(opts.btnOK.show || opts.btnCancel.show){
 				$jbox.append($jbox_title,$jbox_container,$jbox_buttons);
 			}
 			else{
@@ -265,10 +265,10 @@
 
 		opts=$.extend({},defaults,newOpts);//合并所有参数
 		opts_btnok=$.extend({},defaults.btnOK,newOpts.btnOK);//合并确定按钮参数
-		opts_btncancel=$.extend({},defaults.btnCancle,newOpts.btnCancle);//合并取消按钮参数
+		opts_btncancel=$.extend({},defaults.btnCancel,newOpts.btnCancel);//合并取消按钮参数
 
 		opts.btnOK=opts_btnok;
-		opts.btnCancle=opts_btncancel;
+		opts.btnCancel=opts_btncancel;
 
 		return opts;
 	}
@@ -352,11 +352,11 @@
 }(jQuery,document,window));
 
 //show log
-function log(msg){
-	if(typeof console != "undefined"){
-		console.log(msg);
-	}
-	else{
-		alert(msg);
-	}
-}
+// function log(msg){
+// 	if(typeof console != "undefined"){
+// 		console.log(msg);
+// 	}
+// 	else{
+// 		alert(msg);
+// 	}
+// }

@@ -120,7 +120,7 @@ $.jBox.reposition();
    </tr>
    <tr>
       <td>
-         btnCancle <br>
+         btnCancel <br>
           ·text <br>
           ·show <br>
           ·extclass <br>

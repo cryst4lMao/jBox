@@ -14,7 +14,7 @@ $(function() {
                 $.jBox.close(ele);
             }
         },
-        btnCancle:{
+        btnCancel:{
             onBtnClick:function(ele){
                 log("cancle");
                 $.jBox.close(ele);
