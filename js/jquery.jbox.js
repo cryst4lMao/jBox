@@ -18,7 +18,7 @@
 		btnOK:{//确定按钮参数
 			text:"确定",//按钮显示文字
 			show:true,//是否显示按钮
-			extclass:"btn btn-blue",//按钮追加的样式
+			extclass:"btn btn-primary",//按钮追加的样式
 			onBtnClick:false//点击按钮的事件
 		},
 		btnCancel:{

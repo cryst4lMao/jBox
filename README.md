@@ -48,6 +48,13 @@ $(".test1").jBox({
 $.jBox.reposition();
 ```
 
+**显示/隐藏loading弹层**
+
+```js
+$.jBox.showloading();
+$.jBox.hideloading();
+```
+
 **参数说明**
 <table>
    <tr>

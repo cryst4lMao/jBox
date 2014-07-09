@@ -3,21 +3,22 @@
 	top:0;
 	left:0;
 	background-color:#fff;
-	border-radius:3px;
 	overflow:hidden;
 	z-index:99999;
-	box-shadow:0 0 2px 2px rgba(0,0,0,0.2);
+	border: 1px solid rgba(0,0,0,.2);
+	border-radius: 6px;
+	box-shadow: 0 5px 15px rgba(0,0,0,.5);
 }
 .jbox-title{
 	position:relative;
-	color:#fff;
-	height:30px;
-	background-color:#4A4A4A;
+	color:#000;
+	height:40px;
+	line-height:40px;
+	background-color:#fff;
+	border-bottom: 1px solid #e5e5e5;
 }
 .jbox-title-txt{
-	font-size:12px;
-	/*font-weight:bold;*/
-	line-height:30px;
+	font-size:14px;
 	padding-left:10px;
 }
 .jbox-close{
@@ -27,28 +28,21 @@
 	display:block;
 	width:14px;
 	height:14px;
-	background:url("Images/remove.png") no-repeat;
-	_background:url("Images/remove.gif") no-repeat;
+	background:url("Images/remove-black.png") no-repeat;
 	z-index:999999;
 }
-.jbox-container,
-.jbox-buttons{
-	border:1px solid #ccc;
-}
 .jbox-container{
-	padding:10px 20px;
-	border-width:0 1px;
-	border-top: none;
+	padding:15px;
 	overflow-y:auto;
 	overflow-x:auto;
 }
 .jbox-buttons{
-	padding:10px 20px 10px 10px;
-	border-top:none;
+	padding:10px;
+	border-top: 1px solid #e5e5e5;
 	text-align: right;
 }
 .jbox-buttons a{
-	margin:0 5px;
+	margin-left:5px;
 }
 
 #jbox-loading{
@@ -69,11 +63,20 @@
 	top:50%;
 	left:50%;
 	margin:-40px 0 0 -40px;
-	background:url(Images/loading.png) no-repeat;
-	-webkit-animation:rotateLoading 2s linear 0 infinite;
-	-moz-animation:rotateLoading 2s linear 0 infinite;
+	background:url(Images/loading-blue.png) no-repeat;
+	-webkit-animation:rotateLoading 0.8s linear infinite;
+	-moz-animation:rotateLoading 0.8s linear infinite;
+	animation:rotateLoading 0.8s linear infinite;
 }
 
+@keyframes rotateLoading {
+    0% {
+        -webkit-transform:rotate(0deg)
+    }
+    100% {
+        -webkit-transform:rotate(360deg)
+    }
+}
 
 @-webkit-keyframes rotateLoading {
     0% {
@@ -86,9 +89,9 @@
 
 @-moz-keyframes rotateLoading {
     0% {
-        -webkit-transform:rotate(0deg)
+        -moz-transform:rotate(0deg)
     }
     100% {
-        -webkit-transform:rotate(360deg)
+        -moz-transform:rotate(360deg)
     }
 }

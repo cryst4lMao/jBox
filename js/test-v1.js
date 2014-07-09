@@ -10,18 +10,17 @@ $(function() {
         },
         btnOK:{
             onBtnClick:function(ele){
-                log(this);
+                console.log(this);
                 $.jBox.close(ele);
             }
         },
         btnCancel:{
             onBtnClick:function(ele){
-                log("cancle");
+                console.log("cancle");
                 $.jBox.close(ele);
             }
         }
     });
-
 
     $("#btn3").click(function(){
         $("#box3").jBox();
@@ -36,7 +35,7 @@ $(function() {
 
     $("#loading").click(function(){
         $.jBox.showloading();
-        setTimeout($.jBox.hideloading,2000);
+        // setTimeout($.jBox.hideloading,2000);
     });
 
 });
