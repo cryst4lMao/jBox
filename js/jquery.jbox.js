@@ -313,7 +313,7 @@
 
 	//使用格式: $.jBox.show();
 	publicmethod.show=function(options){
-		var opts=$.extend({},defaults,options),
+		var opts=_extendOpts(options?options:{}),
 			newBox=new JBox({
 				title:opts.title,
 				$content:opts.content
